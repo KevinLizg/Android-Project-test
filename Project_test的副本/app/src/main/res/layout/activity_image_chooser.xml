@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/chooser"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+
+    <Button
+        android:id="@+id/choose_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:background="#e52525"
+        android:layout_below="@+id/chooser"
+        android:text="Choose Your Photo" />
+
+    <TextView
+        android:id="@+id/photo_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_below="@id/choose_image_btn"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/tag"
+        android:layout_below="@+id/set_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit"/>
+
+
+    <!--<Button-->
+    <!--android:id="@+id/enc"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/choose_image_btn"-->
+    <!--android:text="加密"/>-->
+    <TextView
+        android:id="@+id/set_tag"
+        android:text="Set your Tag of your picture"
+        android:layout_below="@+id/choose_image_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tag" />
+
+    <!--<Button-->
+        <!--android:text="加密"-->
+        <!--android:id="@+id/en"-->
+        <!--android:layout_marginTop="500dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<Button-->
+        <!--android:text="解密"-->
+        <!--android:id="@+id/de"-->
+        <!--android:layout_below="@+id/en"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+</RelativeLayout>

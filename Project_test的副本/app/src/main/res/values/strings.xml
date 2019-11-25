@@ -1,0 +1,29 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">>
+    <string name="hint_operator_name">你好</string>
+    <string name="hello">Hello World, Date!</string>
+    <string name="app_name">Project</string>
+    <string name="strInputAccHint">Please Input Your Username</string>
+    <string name="strAccInputLabel">Username</string>
+    <string name="strPswInputLabel">Password</string>
+    <string name="login">LOG IN</string>
+    <string name="register">REGISTER</string>
+    <string name="cancel">CANCEL</string>
+    <string name="account_empty">USERNAME IS EMPTY,PLEASE TRY AGAIN!</string>
+    <string name="pwd_empty">PASSWORD IS EMPTY,PLEASE TRY AGAIN!</string>
+    <string name="pwd_not_fit_user">PASSWORD IS INCORRECT,PLEASE TRY AGAIN!</string>
+    <string name="pwd_new_empty">NEW PASSWORD IS EMPTY,PLEASE TRY AGAIN!</string>
+    <string name="pwd_check_empty">PASSWORD CONFIRMATION IS EMPTY!</string>
+    <string name="pwd_not_the_same">PASSWORD CONFIRMATION INCORRECT</string>
+    <string name="register_fail">REGISTER FAILED!</string>
+    <string name="register_success">REGISTER SUCCESS!</string>
+    <string name="resetpwd_fail">MODIFICATION FAILED!</string>
+    <string name="resetpwd_success">MODIFICATION SUCCESS!</string>
+    <string name="login_success">LOG SUCCESS!</string>
+    <string name="cancel_success">REMOVE SUCCESS!</string>
+    <string name="login_fail">LOG FAILED!PLEASE ENTER CORRECT USERNAME AND PASSWORD!</string>
+    <string name="cancel_fail">REMOVE FAILED!PLEASE ENTER CORRECT USERNAME AND PASSWORD!</string>
+    <string name="name_already_exist">USERNAME【<xliff:g example="tom" id="id1">%1$s</xliff:g>】EXISTS!PLEASE ENTER AGAIN</string>
+    <string name="name_not_exist">USERNAME【<xliff:g example="tom" id="id1">%1$s</xliff:g>】NOT EXIST!PLEASE ENTER AGAIN</string>
+    <string name="user_login_success">USER：<xliff:g example="tom" id="id2">%1$s</xliff:g>LOG IN!</string>
+</resources>
+

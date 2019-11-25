@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tex"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"
+        android:text="CONFIRM YOUR GESTURE"
+        android:textColor="#4169E1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        />
+
+    <com.example.project_test.view.Gesture
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tex"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:id="@+id/gestureView">
+
+    </com.example.project_test.view.Gesture>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ENTER"
+        android:id="@+id/shit1"
+        android:layout_below="@+id/gestureView"
+        android:layout_marginTop="20dp"
+        android:onClick="back_to_login"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:background="#d95b5b"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
