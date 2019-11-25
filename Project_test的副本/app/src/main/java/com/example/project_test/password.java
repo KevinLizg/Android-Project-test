@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +23,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +50,15 @@ public class password extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
 
+
+
         Toolbar chooser = (Toolbar) findViewById(R.id.chooser);
         setSupportActionBar(chooser);
 
         Intent g= getIntent();
         final String username=g.getStringExtra("user");
+
+//        File file=new File(getExternalFilesDir(username).getPath());
 
         pass= (ListView) findViewById(R.id.list_password);
 
@@ -67,11 +77,15 @@ public class password extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Passw passw=PassList.remove(index);
-                        String [] remove={passw.getDis(),passw.getPassw(),username};
+                        String [] remove={passw.getDis(),username};
                         UserDataManager.DataBaseManagementHelper dbHelper=new UserDataManager.DataBaseManagementHelper(password.this);
                         SQLiteDatabase re=dbHelper.getWritableDatabase();
-                        re.execSQL("delete from user_password where pass_dis=? and pass_path=? and user_name=?",remove);
+                        re.execSQL("delete from user_password where pass_dis=? and user_name=?",remove);
                         re.close();
+                        File file=new File(getExternalFilesDir(username).getPath()+File.separator+passw.getDis()+".txt");
+                        if(file.exists()){
+                            file.delete();
+                        }
                         adapter.notifyDataSetChanged();
                     }
                 });
@@ -89,22 +103,34 @@ public class password extends AppCompatActivity {
         pass.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Passw p=PassList.get(position);
-                AlertDialog.Builder dia=new AlertDialog.Builder(password.this);
-                final View v=getLayoutInflater().inflate(R.layout.dialog_text,null);
-                d= (TextView) v.findViewById(R.id.text_des);
-                pa=(TextView) v.findViewById(R.id.text_pass);
-                d.setText(p.getDis());
-                pa.setText(p.getPassw());
-                dia.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @RequiresApi(api = Build.VERSION_CODES.M)
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+//                final Passw p=PassList.get(position);
+//                AlertDialog.Builder dia=new AlertDialog.Builder(password.this);
+//                final View v=getLayoutInflater().inflate(R.layout.dialog_text,null);
+//                d= (TextView) v.findViewById(R.id.text_des);
+//                pa=(TextView) v.findViewById(R.id.text_pass);
+//                d.setText(p.getDis());
+////                getExternalFilesDir("Kevin").getPath() + File.separator + "log.txt"
+//                String password= ReadTxtFromSDCard(getExternalFilesDir(username).getPath() + File.separator + p.getDis()+".txt");
+////                decrypt(getExternalFilesDir(username).getPath() + File.separator + p.getDis()+".txt");
+//                pa.setText(password);
+//                dia.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+////                    @RequiresApi(api = Build.VERSION_CODES.M)
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+////                        String password= ReadTxtFromSDCard(getExternalFilesDir(username).getPath() + File.separator + p.getDis()+".txt");
+////                        decrypt(getExternalFilesDir(username).getPath() + File.separator + p.getDis()+".txt");
+////                        pa.setText(password);
+//                    }
+//                });
+//                dia.setView(v);
+//                dia.show();
 
-                    }
-                });
-                dia.setView(v);
-                dia.show();
+                Passw p=PassList.get(position);
+                Intent intent=new Intent(password.this,PassReview.class);
+                intent.putExtra("path",p.getDis());
+                intent.putExtra("user",username);
+                decrypt(getExternalFilesDir(username).getPath() + File.separator + p.getDis()+".txt");
+                startActivity(intent);
             }
         });
 //        List<Passw> PassList = new ArrayList<Passw>();
@@ -169,7 +195,21 @@ public class password extends AppCompatActivity {
                 else {
                     values.put("user_name",username);
                     values.put("pass_dis",des.getText().toString());
-                    values.put("pass_path",password.getText().toString());
+                    //Write text
+                    try {
+                        FileWriter fw = new FileWriter(getExternalFilesDir(username).getPath() + File.separator +
+                                des.getText().toString()+".txt");
+                        fw.write(password.getText().toString());
+//                        encrypt(getExternalFilesDir(username).getPath() + File.separator +
+//                                des.getText().toString()+".txt");
+                        fw.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    encrypt(getExternalFilesDir(username).getPath() + File.separator+
+                            des.getText().toString()+".txt");
+                    //End
+//                    values.put("pass_path",password.getText().toString());
                     db.insert("user_password",null,values);
                     db.close();
                 }
@@ -199,9 +239,10 @@ public class password extends AppCompatActivity {
 
         if(cursor.moveToFirst()){
             do{
-                String password=cursor.getString(cursor.getColumnIndex("pass_path"));
+//                String password=cursor.getString(cursor.getColumnIndex("pass_path"));
                 String passdis=cursor.getString(cursor.getColumnIndex("pass_dis"));
-                Passw passw=new Passw(passdis,password);
+//                Passw passw=new Passw(passdis,password);
+                Passw passw=new Passw(passdis);
                 PassList.add(passw);
             }while (cursor.moveToNext());
             cursor.close();
@@ -209,5 +250,43 @@ public class password extends AppCompatActivity {
         db.close();
 
         return PassList;
+    }
+
+    private String ReadTxtFromSDCard(String filename){
+
+        StringBuilder sb = new StringBuilder("");
+        //判断是否有读取权限
+        if(Environment.getExternalStorageState().
+                equals(Environment.MEDIA_MOUNTED)){
+
+            //打开文件输入流
+            try {
+                FileInputStream input = new FileInputStream(filename);
+                byte[] temp = new byte[1024];
+
+                int len = 0;
+                //读取文件内容:
+                while ((len = input.read(temp)) > 0) {
+                    sb.append(new String(temp, 0, len));
+                }
+                //关闭输入流
+                input.close();
+            } catch (java.io.IOException e) {
+                Log.e("ReadTxtFromSDCard","ReadTxtFromSDCard");
+                e.printStackTrace();
+            }
+
+        }
+        return sb.toString();
+    }
+
+    public void encrypt(String path) {
+            if (!FileEnDecryptManager.getInstance().isEncrypt(path))
+            FileEnDecryptManager.getInstance().encryptFile(path);
+    }
+
+    public void decrypt(String path) {
+        if (FileEnDecryptManager.getInstance().isEncrypt(path))
+            FileEnDecryptManager.getInstance().decryptFile(path);
     }
 }

@@ -175,7 +175,7 @@ public class ImageChooser extends AppCompatActivity {
                 f.delete();
             }
 //            FileEnDecryptManager.getInstance().encryptFile(photoPath.getText().toString());
-//            FileEnDecryptManager.getInstance().encryptFile(getExternalFilesDir(username).getPath()+"/"+tag+".jpg");
+            FileEnDecryptManager.getInstance().encryptFile(getExternalFilesDir(username).getPath()+"/"+tag+".jpg");
             Toast.makeText(ImageChooser.this,"Encrypt Success", Toast.LENGTH_LONG).show();
         }
     }

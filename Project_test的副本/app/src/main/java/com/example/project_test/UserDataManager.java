@@ -27,7 +27,7 @@ public class UserDataManager {             //用户数据管理类
     private static final String W_TABLE="user_password";
     private static final String F_TABLE="user_file";
     public static final String P_PATH="pic_tag";
-    public static final String W_PATH="pass_path";
+//    public static final String W_PATH="pass_path";
     public static final String W_DIS="pass_dis";
     public static final String F_PATH="file_path";
 
@@ -46,7 +46,7 @@ public class UserDataManager {             //用户数据管理类
 
     private static final String W_CREATE = "CREATE TABLE " + W_TABLE + " ("
             + USER_NAME + " varchar, "
-            + W_PATH + " varchar, "
+//            + W_PATH + " varchar, "
             + W_DIS + " varchar, "
             + " PRIMARY KEY("+USER_NAME+","+W_DIS+"), "
             + " FOREIGN KEY ("+USER_NAME+") REFERENCES "+TABLE_NAME+"("+USER_NAME+"));";

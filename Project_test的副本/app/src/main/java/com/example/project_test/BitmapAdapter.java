@@ -26,9 +26,9 @@ public class BitmapAdapter extends ArrayAdapter<Bm> {
         Bm test = getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
 //        TextView set=(TextView) view.findViewById(R.id.shit);
-        ImageView bitmap = view.findViewById(R.id.shit);
+//        ImageView bitmap = view.findViewById(R.id.shit);
         TextView tag = view.findViewById(R.id.get_tag);
-        bitmap.setImageBitmap(test.getImage());
+//        bitmap.setImageBitmap(test.getImage());
         tag.setText(test.getTag());
         return view;
     }

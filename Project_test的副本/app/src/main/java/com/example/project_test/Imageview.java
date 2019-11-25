@@ -1,27 +1,38 @@
 package com.example.project_test;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.project_test.util.ImageUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,12 +102,15 @@ public class Imageview extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                final int index=position;
-//                    final Bm b=arrayList.get(position);
-//                    Intent name=getIntent();
-//                    Intent next=new Intent(Imageview.class,ImageReview.c)
-//                decrypt(getExternalFilesDir(name.getStringExtra("user")).getPath()+"/"+b.getTag()+".jpg");
-//                System.out.println(getExternalFilesDir(name.getStringExtra("user")).getPath()+"/"+b.getTag()+".jpg");
+                final int index=position;
+                    final Bm b=arrayList.get(position);
+                    Intent name=getIntent();
+                    String user=name.getStringExtra("user");
+                    Intent next=new Intent(Imageview.this,ImageReview.class);
+                    decrypt(getExternalFilesDir(name.getStringExtra("user")).getPath()+"/"+b.getTag()+".jpg");
+                    next.putExtra("user",user);
+                    next.putExtra("image",b.getTag());
+                    startActivity(next);
             }
         });
 
@@ -192,4 +206,6 @@ public class Imageview extends AppCompatActivity {
                 FileEnDecryptManager.getInstance().decryptFile(path);
             }
     }
+
+
 }
